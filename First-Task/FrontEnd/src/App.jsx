@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import "./index.css"
-import Register from './Components/Register'
-import Forgott from './Components/Forgott'
-import Login from './Components/Login'
-import Dashboard from './Components/Dashboard'
-import Home from './Components/Home'
+import Register from './Pages/Register'
+import ForgotPassword from './Pages/ForgotPassword'
+import Login from './Pages/Login'
+import Dashboard from './ProtectedRoutes/Dashboard'
+import Home from './Pages/Home'
 import {BrowserRouter ,Routes, Route} from "react-router-dom"
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/forgott" element={<Forgott />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
