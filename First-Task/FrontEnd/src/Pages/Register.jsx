@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //function to connect to backend and register user
+  const handleRegister = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Handle successful registration (e.g., redirect to login)
+        console.log('Registration successful:', data);
+        alert('Registration successful! Please check your email to verify your account.');
+      } else {
+        // Handle registration error
+        console.error('Registration failed:', data.message);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen flex justify-center items-center">
@@ -13,6 +43,8 @@ const Register = () => {
             type="text"
             placeholder="Username"
             className="p-2 border rounded"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
 
           <label htmlFor="email">Email</label>
@@ -21,6 +53,8 @@ const Register = () => {
             type="email"
             placeholder="Your Email"
             className="p-2 border rounded"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           ></input>
           <label htmlFor="password">Password</label>
 
@@ -29,9 +63,13 @@ const Register = () => {
             type="password"
             placeholder="Password"
             className="p-2 border rounded"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button className="bg-white p-2 rounded">Register</button>
+          <button onClick={() => handleRegister()} className="bg-white p-2 rounded">
+            Register
+          </button> 
 
           <p className="text-lg">Already registered?</p>
           <Link

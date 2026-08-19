@@ -1,3 +1,6 @@
 const register = require("../controller/Register");
+const router = require("express").Router();
+router.post("/", register.register);
+router.get("/verify-email/:token", register.verifyEmail);
 
-router.post("/register", register.register);
+module.exports = router;

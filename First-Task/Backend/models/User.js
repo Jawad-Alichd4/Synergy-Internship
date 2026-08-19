@@ -14,13 +14,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },    
-  Isverified: {
+  isVerified: {
     type: Boolean,
     default: false, 
     },
     verifyToken: {
     type: String,
     default: null,      
+    },
+    verifyTokenExpire: {
+    type: Date,
+    default: null,
     },
     resetToken: { 
         type: String,

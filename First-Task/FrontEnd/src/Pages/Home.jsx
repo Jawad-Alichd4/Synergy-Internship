@@ -14,7 +14,8 @@ const Home = () => {
         </h1>
 
         <p className="text-gray-600 text-lg mb-8">
-          Welcome to our website
+          Welcome to our website. This is our home page where you can register or login to access your account.
+          
         </p>
 
         {/* Create Account */}

@@ -1,7 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const API_URL = 'http://localhost:5000/api';
+
 const ForgotPassword = () => {
+  // Function to handle password reset request
+  const handlePasswordReset = async (email) => {
+    try {
+      // Simulate an API call to reset the password
+      const response = await fetch(`${API_URL}/forgot-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send password reset email');
+      }
+
+      // Handle successful password reset request
+      alert('Password reset email sent successfully!');
+    } catch (error) {
+      console.error('Error occurred while resetting password:', error);
+      alert(error.message);
+    }
+  };
+
   return (
     <div className="min-h-screen flex justify-center items-center bg-blue-100">
 
@@ -39,6 +67,7 @@ const ForgotPassword = () => {
 
         {/* Reset Button */}
         <button
+        onClick= {() => handlePasswordReset(document.getElementById('email').value)}
           className="w-full bg-blue-500 text-white font-bold py-3 rounded-lg hover:bg-blue-600 transition duration-300"
         >
           Reset Password
