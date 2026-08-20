@@ -14,7 +14,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 app.use(cors({
-  origin: "http://localhost:5173", // your Vite frontend URL
+  origin: "http://localhost:5173", //  Vite frontend URL
   credentials: true,
 }));
 connectDB();

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
-const API_URL = "http://localhost:5000/api/auth"; 
+const API_URL = "http://localhost:5000/api/register";
 
 const VerifyEmail = () => {
   const { token } = useParams();
@@ -16,10 +16,10 @@ const VerifyEmail = () => {
     const verify = async () => {
       try {
         const res = await fetch(`${API_URL}/verify-email/${token}`);
-        const data = await res.json();
+        const data = await res.json().catch(() => ({}));
 
         setStatus(res.ok ? "success" : "error");
-        setMessage(data.message);
+        setMessage(data.message || "Email verification failed.");
       } catch (err) {
         setStatus("error");
         setMessage("Something went wrong. Please try again.");
